@@ -7,13 +7,13 @@ novoselac\controller\ObradaUsluga.class
 novoselac\resources\JavaEE8Resource.class
 novoselac\model\Operater.class
 novoselac\model\Posjeta.class
-novoselac\djecjaigraonica_3\JakartaRestConfiguration.class
 novoselac\model\Dijete.class
 novoselac\JAXRSConfiguration.class
 novoselac\util\PocetniInsert.class
 novoselac\util\NovoselacException.class
 novoselac\controller\ObradaPosjeta.class
 novoselac\util\HibernateUtil.class
+novoselac\JakartaRestConfiguration.class
 novoselac\model\Usluga.class
 novoselac\controller\ObradaOperater.class
 novoselac\Start.class
