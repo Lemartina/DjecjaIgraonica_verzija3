@@ -6,8 +6,8 @@ novoselac\controller\ObradaDjelatnik.class
 novoselac\controller\ObradaUsluga.class
 novoselac\resources\JavaEE8Resource.class
 novoselac\model\Operater.class
-novoselac\javaServlet.class
 novoselac\model\Posjeta.class
+novoselac\JavaServlet.class
 novoselac\model\Dijete.class
 novoselac\JAXRSConfiguration.class
 novoselac\util\PocetniInsert.class

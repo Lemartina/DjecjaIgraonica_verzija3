@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-public class javaServlet extends HttpServlet {
+public class JavaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +55,18 @@ public class javaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.setContentType("text/html");
+        PrintWriter out= response.getWriter();
+        String naziv =request.getParameter("naziv");
+        String jedinicaMjere = request.getParameter("jedinicaMjere");
+        String cijena= request.getParameter("cijena");
+        String kolicina= request.getParameter("kolicina");
+  
+    out.print("Naziv: "+ naziv);
+     out.print("Jedinica mjere: "+ jedinicaMjere);
+      out.print("Cijena: "+ cijena);
+       out.print("Kolicina: "+ kolicina);
     }
 
     /**
