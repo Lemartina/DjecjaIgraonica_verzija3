@@ -6,10 +6,10 @@ package novoselac;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -37,7 +37,7 @@ public class javaServlet extends HttpServlet {
             out.println("<title>Servlet javaServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet javaServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
             out.println("</body>");
             out.println("</html>");
         }
