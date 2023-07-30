@@ -10,6 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 /**
  *
@@ -63,11 +66,29 @@ public class JavaServlet extends HttpServlet {
         String cijena= request.getParameter("cijena");
         String kolicina= request.getParameter("kolicina");
   
-    out.print("Naziv: "+ naziv);
-     out.print("Jedinica mjere: "+ jedinicaMjere);
-      out.print("Cijena: "+ cijena);
-       out.print("Kolicina: "+ kolicina);
-    }
+           
+       //jdbc connection
+       
+       	try {
+	Class.forName("com.cj.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection
+	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "root");
+	Statement st = conn.createStatement();
+        st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jeidnicaMjere) "
+                + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
+                        
+                        out.println("Podaci uspjepšno uneseni!");
+                
+							
+		} catch (Exception e) {
+			out.println(e);
+
+		}
+	
+	
+	
+	
+   }
 
     /**
      * Handles the HTTP <code>POST</code> method.
