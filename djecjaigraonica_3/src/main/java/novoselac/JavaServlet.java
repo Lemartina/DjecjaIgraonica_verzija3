@@ -86,8 +86,6 @@ public class JavaServlet extends HttpServlet {
 		}
 	
 	
-	
-	
    }
 
     /**
