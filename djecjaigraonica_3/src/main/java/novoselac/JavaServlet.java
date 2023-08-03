@@ -71,12 +71,13 @@ public class JavaServlet extends HttpServlet {
   
            
        //jdbc connection
-       
+       //https://www.youtube.com/watch?v=y_YxwyYRJek
+       //https://www.youtube.com/watch?v=5vzCjvUwMXg
        	try {
 	Class.forName("com.cj.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection
+	Connection con = DriverManager.getConnection
 	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
-	Statement st = conn.createStatement();
+	Statement st = con.createStatement();
         st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jeidnicaMjere) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
                         
