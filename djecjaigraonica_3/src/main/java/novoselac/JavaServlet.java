@@ -81,7 +81,7 @@ public class JavaServlet extends HttpServlet {
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
        	try {
          //2b
-	Class.forName("com.cj.mysql.jdbc.Driver");
+	Class.forName("com.mysql.cj.jdbc.Driver");
 	//3
         Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
