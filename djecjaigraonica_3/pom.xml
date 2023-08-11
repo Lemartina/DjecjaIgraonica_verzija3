@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>novoselac</groupId>
-    <artifactId>djecjaigraonica</artifactId>
+    <artifactId>DjecjaIgraonica</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>djecjaigraonica-1.0-SNAPSHOT</name>
+    <name>DjecjaIgraonica-1.0-SNAPSHOT</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -21,6 +21,18 @@
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
             <version>10.0.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>novoselac</groupId>
+            <artifactId>Novoselac</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>edunova</groupId>
+            <artifactId>EdunovaAPP</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>

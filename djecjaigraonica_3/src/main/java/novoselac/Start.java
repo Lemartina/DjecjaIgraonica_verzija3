@@ -11,7 +11,7 @@ package novoselac;
 //import novoselac.model.Posjeta;
 //import novoselac.model.Usluga;
 //import novoselac.util.NovoselacException;
-import novoselac.util.PocetniInsert;
+//import novoselac.util.PocetniInsert;
 //import novoselac.view.SplashScreen;
 
 /**
