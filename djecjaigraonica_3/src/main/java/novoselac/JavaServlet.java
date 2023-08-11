@@ -33,22 +33,22 @@ public class JavaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet javaServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-//    }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet javaServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -81,12 +81,12 @@ public class JavaServlet extends HttpServlet {
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
        	try {
          //2b
-	Class.forName("com.cj.mariaDB.jdbc.Driver");
+	Class.forName("com.cj.mysql.jdbc.Driver");
 	//3
         Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
-	("jdbc:mariaDB://localhost:3306/djecjaigraonicahib", "root", "");
+	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jeidnicaMjere) "
+        st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jedinicaMjere) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
