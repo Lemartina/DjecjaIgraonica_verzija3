@@ -21,8 +21,8 @@ import java.sql.Statement;
  * @author Administrator
  */
 
-@WebServlet("/JavaServlet")
-public class JavaServlet extends HttpServlet {
+@WebServlet("/JavaServletDjeca")
+public class JavaServletDjeca extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,17 +65,18 @@ public class JavaServlet extends HttpServlet {
         
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
-        String naziv =request.getParameter("naziv");
-        String jedinicaMjere = request.getParameter("jedinicaMjere");
-        String cijena= request.getParameter("cijena");
-        String kolicina= request.getParameter("kolicina");
-  
+        String ime =request.getParameter("ime");
+        String prezime = request.getParameter("prezime");
+        String oib= request.getParameter("oib");
+        String imeRoditelja= request.getParameter("imeRoditelja");
+        String telefonRoditelja= request.getParameter("telefonRoditelja");
          
-        out.print("Uneseni podaci za uslugu su: ");
-        out.print(" naziv: "+ naziv);
-         out.print(", jedinica mjere: "+ jedinicaMjere);
-          out.print(", cijena: "+ cijena);
-           out.print(", količina: "+ kolicina+ " ");
+        out.print("Uneseni podaci za dijete su: ");
+        out.print(" ime: "+ ime);
+         out.print(", prezime: "+ prezime);
+          out.print(", oib: "+ oib);
+           out.print(", imeRoditelja: "+ imeRoditelja+ " ");
+            out.print(", telefonRoditelja: "+ telefonRoditelja+ " ");
        //jdbc connection
        //https://www.youtube.com/watch?v=y_YxwyYRJek
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
@@ -86,8 +87,8 @@ public class JavaServlet extends HttpServlet {
         Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jedinicaMjere) "
-                + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
+        st.executeUpdate("insert into usluga(ime, prezime, oib, imeRoditelja, telefonRoditelja) "
+                + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
                 
