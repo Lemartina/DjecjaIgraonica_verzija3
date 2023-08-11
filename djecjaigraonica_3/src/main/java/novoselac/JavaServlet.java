@@ -4,10 +4,11 @@
  */
 package novoselac;
 
-import java.sql.*;
+import java.sql.*;//1
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ import java.sql.Statement;
  * @author Administrator
  */
 
-
+@WebServlet("/JavaServlet")
 public class JavaServlet extends HttpServlet {
 
     /**
@@ -32,22 +33,22 @@ public class JavaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet javaServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet javaServlet</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
+//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -69,14 +70,21 @@ public class JavaServlet extends HttpServlet {
         String cijena= request.getParameter("cijena");
         String kolicina= request.getParameter("kolicina");
   
-           
+         
+        
+//        out.print("Naziv: "+ naziv);
+//         out.print("Jedinica mjere: "+ jedinicaMjere);
+//          out.print("Cijena: "+ cijena);
+//           out.print("Količina: "+ kolicina);
        //jdbc connection
        //https://www.youtube.com/watch?v=y_YxwyYRJek
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
        	try {
-	Class.forName("com.cj.mysql.jdbc.Driver");
-	Connection con = DriverManager.getConnection
-	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
+         //2b
+	Class.forName("com.cj.mariaDB.jdbc.Driver");
+	//3
+        Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
+	("jdbc:mariaDB://localhost:3306/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
         st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jeidnicaMjere) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
@@ -87,11 +95,12 @@ public class JavaServlet extends HttpServlet {
 		} catch (Exception e) {
 			out.println(e);
 
+         
 		}
 	
         
 	
-   }
+  }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -104,7 +113,7 @@ public class JavaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      doGet(request, response);
     }
 
     /**
