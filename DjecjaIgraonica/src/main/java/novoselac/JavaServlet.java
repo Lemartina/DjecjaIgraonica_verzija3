@@ -71,11 +71,11 @@ public class JavaServlet extends HttpServlet {
         String kolicina= request.getParameter("kolicina");
   
          
-        out.print("Uneseni podaci za uslugu su: ");
-        out.print(" naziv: "+ naziv);
-         out.print(", jedinica mjere: "+ jedinicaMjere);
-          out.print(", cijena: "+ cijena);
-           out.print(", količina: "+ kolicina+ " ");
+//        out.print("Uneseni podaci za uslugu su: ");
+//        out.print(" naziv: "+ naziv);
+//         out.print(", jedinica mjere: "+ jedinicaMjere);
+//          out.print(", cijena: "+ cijena);
+//           out.print(", količina: "+ kolicina+ " ");
        //jdbc connection
        //https://www.youtube.com/watch?v=y_YxwyYRJek
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
@@ -83,8 +83,8 @@ public class JavaServlet extends HttpServlet {
          //2b
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	//3
-        Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
+        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
+	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
         st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jedinicaMjere) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");

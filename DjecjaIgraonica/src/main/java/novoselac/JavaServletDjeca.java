@@ -83,9 +83,9 @@ public class JavaServletDjeca extends HttpServlet {
        	try {
          //2b
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	//3
-        Connection con = DriverManager.getConnection//jdbc:mariaDB://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost:3306/djecjaigraonicahib", "root", "");
+	//3 
+        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
+	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
         st.executeUpdate("insert into usluga(ime, prezime, oib, imeRoditelja, telefonRoditelja) "
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
