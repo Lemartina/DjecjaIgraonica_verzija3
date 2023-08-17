@@ -86,7 +86,7 @@ public class JavaServlet extends HttpServlet {
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into usluga(naziv, kolicina, cijena, jedinicaMjere) "
+        st.executeUpdate("insert into usluga(naziv,jedinicaMjere, cijena, kolicina ) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
