@@ -71,11 +71,7 @@ public class JavaServlet extends HttpServlet {
         String kolicina= request.getParameter("kolicina");
   
          
-//        out.print("Uneseni podaci za uslugu su: ");
-//        out.print(" naziv: "+ naziv);
-//         out.print(", jedinica mjere: "+ jedinicaMjere);
-//          out.print(", cijena: "+ cijena);
-//           out.print(", količina: "+ kolicina+ " ");
+
        //jdbc connection
        //https://www.youtube.com/watch?v=y_YxwyYRJek
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
