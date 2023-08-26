@@ -71,12 +71,12 @@ public class JavaServletDjeca extends HttpServlet {
         String imeRoditelja= request.getParameter("imeRoditelja");
         String telefonRoditelja= request.getParameter("telefonRoditelja");
          
-//        out.print("Uneseni podaci za dijete su: ");
-//        out.print(" ime: "+ ime);
-//         out.print(", prezime: "+ prezime);
-//          out.print(", oib: "+ oib);
-//           out.print(", imeRoditelja: "+ imeRoditelja+ " ");
-//            out.print(", telefonRoditelja: "+ telefonRoditelja+ " ");
+        out.print("Uneseni podaci za dijete su: ");
+        out.print(" ime: "+ ime);
+         out.print(", prezime: "+ prezime);
+          out.print(", oib: "+ oib);
+           out.print(", imeRoditelja: "+ imeRoditelja+ " ");
+            out.print(", telefonRoditelja: "+ telefonRoditelja+ " ");
        //jdbc connection
        //https://www.youtube.com/watch?v=y_YxwyYRJek
        //https://www.youtube.com/watch?v=5vzCjvUwMXg
@@ -92,7 +92,8 @@ public class JavaServletDjeca extends HttpServlet {
                         
                         out.println("Podaci uspjepšno uneseni!");
                 
-							
+			st.close();
+                        con.close();				
 		} catch (Exception e) {
 			out.println(e);
 

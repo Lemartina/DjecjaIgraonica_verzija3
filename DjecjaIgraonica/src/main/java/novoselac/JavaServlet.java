@@ -87,7 +87,11 @@ public class JavaServlet extends HttpServlet {
                         
                         out.println("Podaci uspjepšno uneseni!");
                 
-							
+			
+st.close();
+con.close();
+
+
 		} catch (Exception e) {
 			out.println(e);
 
@@ -97,7 +101,8 @@ public class JavaServlet extends HttpServlet {
         
 	
   }
-
+    
+  
     /**
      * Handles the HTTP <code>POST</code> method.
      *
