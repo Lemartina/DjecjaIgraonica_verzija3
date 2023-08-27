@@ -97,10 +97,10 @@ public class UslugaView extends HttpServlet{
         
         out.println("<table cellspacing='0' width='350px' border='1'>");
         out.println("<tr>");
-        out.println("<td> cijena</td>");
-        out.println("<td> jedinicaMjere</td>");
-        out.println("<td> kolicina</td>");
-        out.println("<td> naziv</td>");
+        out.println("<td> Cijena</td>");
+        out.println("<td> Jedinica mjere</td>");
+        out.println("<td> Količina</td>");
+        out.println("<td> Naziv</td>");
         out.println("</tr>");
         
         
@@ -115,6 +115,8 @@ public class UslugaView extends HttpServlet{
         }
         
         out.println("<table>");
+        
+        out.println("<a href=usluge.html>vrati se nazad na unos usluga</a>");
         
         
         

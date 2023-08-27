@@ -86,6 +86,7 @@ public class JavaServlet extends HttpServlet {
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
+                           out.println("<a href=usluge.html>Nazad na usluge</a>");
                 
 			
 st.close();
