@@ -21,8 +21,8 @@ import java.sql.Statement;
  * @author Administrator
  */
 
-@WebServlet("/JavaServletDjeca")
-public class JavaServletDjeca extends HttpServlet {
+@WebServlet("/JavaServletDjelatnici")
+public class JavaServletDjelatnici extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,8 +60,8 @@ public class JavaServletDjeca extends HttpServlet {
         String ime = request.getParameter("ime");
         String prezime = request.getParameter("prezime");
         String oib= request.getParameter("oib");
-        String imeRoditelja= request.getParameter("imeRoditelja");
-    String telefonRoditelja= request.getParameter("telefonRoditelja");
+        String iban= request.getParameter("iban");
+    String radnoMjesto= request.getParameter("radnoMjesto");
          
 
        //jdbc connection
@@ -74,11 +74,11 @@ public class JavaServletDjeca extends HttpServlet {
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into dijete(ime,prezime, oib, imeRoditelja, telefonRoditelja ) "
-                + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
+        st.executeUpdate("insert into djelatnik(ime,prezime, oib, iban, radnoMjesto ) "
+                + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+iban+"', '"+radnoMjesto+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href=djeca.html>Nazad na dijete</a>");
+                           out.println("<a href=djelatnici.html>Nazad na djelanika</a>");
                 
 			
 st.close();
