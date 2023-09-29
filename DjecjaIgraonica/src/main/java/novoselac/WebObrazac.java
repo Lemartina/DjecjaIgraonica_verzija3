@@ -70,6 +70,8 @@ public class WebObrazac extends HttpServlet{
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
        
+        
+//        OBRAZAC ZA POPUNAJVANJE - TABLICA DIJETE, DIJETEPOSJETA,POSJETA, USUGAPOSJETE, USLUGA
          out.println("<div class=\"index-intro\"> \n" +
 "		<div class=\"wrapper\">\n" +
 "			<h1>Rezervacija termina za igraonicu</h1>\n" +
@@ -104,25 +106,29 @@ public class WebObrazac extends HttpServlet{
 "                   <br><br>\n" +
 "                </div>\n" +
 "                   \n" +
+                 "<div>\n" +
+"                   <input type=\"date\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
 "                    <div>\n" +
-"                   <input type=\"datumVrijemeDolaska\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\" placeholder='Datum i vrijeme dolaska'>\n" +
+"                   <input type=\"time\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
 "                   <br><br>\n" +
 "                </div>\n" +
 "                   \n" +
-"                      <div>\n" +
-"                   <input type=\"datumVrijemeOdlaska\" id=\"datumVrijemeOdlaska\" name= \"datumVrijemeOdlaska\" placeholder='Datum i vrijeme odlaska'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"                   \n" +
-"                         <div>\n" +
+"                <div>\n" +
 "                   <input type=\"message\" id=\"napomena\" name= \"napomena\" placeholder='Napomena'>\n" +
 "                   <br><br>\n" +
 "                </div>\n" +
 "                   ");
 
-         out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
+         
+          out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
        //jdbc connection
 
+       
+     
+       
        	try {
          //2b
 	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -130,7 +136,8 @@ public class WebObrazac extends HttpServlet{
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	
-        
+//      TABLICA USLUGA
+
         String sql;
         sql="select  * from  usluga";
         Statement stmt = con.createStatement();
@@ -138,11 +145,7 @@ public class WebObrazac extends HttpServlet{
         rs=stmt.executeQuery(sql);
         
         
- 
-        
-       
-        
-             
+            
         
         out.println("<table cellspacing='0' width='350px' border='1'>");
         out.println("<tr>");
@@ -175,16 +178,6 @@ public class WebObrazac extends HttpServlet{
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-
-
 		} catch (ClassNotFoundException ex) {
               Logger.getLogger(novoselac.model.Usluga.class.getName());
 			out.println(ex);
