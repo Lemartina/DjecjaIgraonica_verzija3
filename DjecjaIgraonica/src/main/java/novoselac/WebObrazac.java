@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  */
 
 
-@WebServlet("/UslugaView")
-public class UslugaView extends HttpServlet{
+@WebServlet("/WebObrazac")
+public class WebObrazac extends HttpServlet{
     
 
     /**
@@ -70,8 +70,57 @@ public class UslugaView extends HttpServlet{
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
        
-         
+         out.println("<div class=\"index-intro\"> \n" +
+"		<div class=\"wrapper\">\n" +
+"			<h1>Rezervacija termina za igraonicu</h1>\n" +
+"			<form action=\"JavaServletDjeca\" method=\"post\" >\n" +
+"                            \n" +
+"                     <!--ovo sve treba staviti u java servlet preko out.println-->          \n" +
+"                   <!--<textarea name=\"message\"> Rezervacija termina za igraonicu </textarea>-->\n" +
+"                   <br><br>\n" +
+"                <div>\n" +
+"                   <input type=\"ime\" id=\"ime\" name= \"ime\" placeholder='Ime djeteta'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"prezime\" id=\"prezime\" name= \"prezime\" placeholder='Prezime djeteta'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"oib\" id=\"oib\" name= \"oib\" placeholder='OIB djeteta'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"               \n" +
+"                            \n" +
+"                 <div>\n" +
+"                   <input type=\"imeRoditelja\" id=\"imeRoditelja\" name= \"imeRoditelja\" placeholder='Ime roditelja'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"\n" +
+"                    <div>\n" +
+"                   <input type=\"telefonRoditelja\" id=\"telefonRoditelja\" name= \"telefonRoditelja\" placeholder='Telefon roditelja'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+"                    <div>\n" +
+"                   <input type=\"datumVrijemeDolaska\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\" placeholder='Datum i vrijeme dolaska'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+"                      <div>\n" +
+"                   <input type=\"datumVrijemeOdlaska\" id=\"datumVrijemeOdlaska\" name= \"datumVrijemeOdlaska\" placeholder='Datum i vrijeme odlaska'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+"                         <div>\n" +
+"                   <input type=\"message\" id=\"napomena\" name= \"napomena\" placeholder='Napomena'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   ");
 
+         out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
        //jdbc connection
 
        	try {
@@ -101,8 +150,8 @@ public class UslugaView extends HttpServlet{
         out.println("<td> Jedinica mjere</td>");
         out.println("<td> Količina</td>");
         out.println("<td> Naziv</td>");
-        out.println("<td> Uredi</td>");
-        out.println("<td> Briši</td>");
+        out.println("<td> Dodaj</td>");
+      
         
         out.println("</tr>");
         
@@ -115,8 +164,8 @@ public class UslugaView extends HttpServlet{
             out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
             out.println("<td>" + rs.getString("kolicina")+"</td>");
             out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td>" +"<a href='UrediUsluge.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
-            out.println("<td>" +"<a href=BrisiUsluge.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
+            out.println("<td>" +"<a href='DodajUsluge.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
+   
        out.println("</tr>");
         }
         
