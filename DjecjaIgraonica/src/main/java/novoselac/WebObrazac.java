@@ -71,7 +71,7 @@ public class WebObrazac extends HttpServlet{
         PrintWriter out= response.getWriter();
        
         
-//        OBRAZAC ZA POPUNAJVANJE - TABLICA DIJETE, DIJETEPOSJETA,POSJETA, USUGAPOSJETE, USLUGA
+//        OBRAZAC ZA POPUNAJVANJE - TABLICA DIJETE, DIJETEPOSJETA,POSJETA, USLUGAPOSJETE, USLUGA
          out.println("<div class=\"index-intro\"> \n" +
 "		<div class=\"wrapper\">\n" +
 "			<h1>Rezervacija termina za igraonicu</h1>\n" +
