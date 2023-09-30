@@ -1,36 +1,18 @@
-
-.curved {
-
+*
+{
+    padding:0;
+    margin:0;
 }
 
-#navigation {
+body{
+    background-image: url(DjecjaIgraonica.jpg);
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    font-family: sans-serif;
 
 }
-
-.container {
-
-}
-
-.separator {
-
-}
-
- 
-	
-
-.index-intro {
-    
-
-}
-
-.wrapper {
-
-	}
-
-#name {
-
-}
-
-.clockStyle {
-
+.menubar{
+    background: rgb(0,100,0);
+    text-align: center;
 }
