@@ -4,7 +4,6 @@
     margin:0;
 }
 
-
 body
 {
     background-image: url(djecjaigraonica.jpg);
@@ -31,3 +30,16 @@ body
     margin:15px;
     padding: 15px;
 }
+
+.menu-bar u li a
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+.active, .menu-bar ul li:hover
+{
+    background: #2bab0d;
+    border-radius: 3px;
+}
+
