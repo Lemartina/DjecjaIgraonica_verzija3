@@ -78,7 +78,7 @@ public class JavaServletDjeca extends HttpServlet {
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href=djeca.html>Nazad na dijete</a>");
+                           out.println("<a href=WebObrazac>Nazad na dijete</a>");
                 
 			
 st.close();

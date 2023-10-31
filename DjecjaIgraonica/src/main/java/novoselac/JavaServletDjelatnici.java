@@ -42,8 +42,6 @@ public class JavaServletDjelatnici extends HttpServlet {
         }
     }
 
-    
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,49 +57,6 @@ public class JavaServletDjelatnici extends HttpServlet {
         
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
-        
-        
-        //POPUNJAVANJE TABLICE USLUGA
-        
-        out.println("<div class=\"index-intro\"> \n" +
-"		<div class=\"wrapper\">\n" +
-"			<h1>Djelatnici</h1>\n" +
-"			<form action=\"JavaServletDjelatnici\" method=\"post\" novalidate>\n" +
-"                            \n" +
-"                                 \n" +
-"                   <textarea name=\"message\"> Popis djelatnika </textarea>\n" +
-"                   <br><br>\n" +
-"                <div>\n" +
-"                   <input type=\"text\" id=\"ime\" name= \"ime\" placeholder='Ime'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"text\" id=\"prezime\" name= \"prezime\" placeholder='Prezime'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"text\" id=\"oib\" name= \"oib\" placeholder='Oib'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"               \n" +
-"                            \n" +
-"                 <div>\n" +
-"                   <input type=\"text\" id=\"iban\" name= \"iban\" placeholder='Iban'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"                               \n" +
-"                 <div>\n" +
-"                   <input type=\"text\" id=\"radnoMjeato\" name= \"radnoMjesto\" placeholder='Radno mjesto'>\n" +
-"                   <br><br>\n" +
-"                </div>");
-                
-                  out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
-  
-        
-        
-        
         String ime = request.getParameter("ime");
         String prezime = request.getParameter("prezime");
         String oib= request.getParameter("oib");
@@ -123,7 +78,7 @@ public class JavaServletDjelatnici extends HttpServlet {
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+iban+"', '"+radnoMjesto+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href=djelatnici.html>Nazad na djelanika</a>");
+                           out.println("<a href=DjelatnikView>Nazad na djelanika</a>");
                 
 			
 st.close();
