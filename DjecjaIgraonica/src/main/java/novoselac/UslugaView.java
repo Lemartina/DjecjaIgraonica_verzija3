@@ -71,6 +71,45 @@ public class UslugaView extends HttpServlet{
         PrintWriter out= response.getWriter();
        
          
+        //OBRAZAC ZA POPUNJAVANJE TABLICE USLUGA
+
+        
+        out.println("<div class=\"index-intro\"> \n" +
+"		<div class=\"wrapper\">\n" +
+"			<h1>Unos usluga</h1>\n" +
+"		<form action=\"JavaServlet\" method =\"post\">\n" +
+"                            \n" +
+"                                 <!--dodavanje tablice-->\n" +
+"                         \n" +
+"                   \n" +
+"                   \n" +
+"                   <!--</textarea>-->\n" +
+"                   <br><br>\n" +
+"                <div>\n" +
+"                   <input type=\"naziv\" id=\"naziv\" name= \"naziv\" placeholder='Naziv'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"jedinicaMjere\" id=\"jedinicaMjere\" name= \"jedinicaMjere\" placeholder='Jedinica mjere'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"cijena\" id=\"cijena\" name= \"cijena\" placeholder='Cijena'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"               \n" +
+"                            \n" +
+"                 <div>\n" +
+"                   <input type=\"kolicina\" id=\"kolicina\" name= \"kolicina\" placeholder='Količina'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   ");
+        
+                  out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
+        
+        
 
        //jdbc connection
 
@@ -83,7 +122,7 @@ public class UslugaView extends HttpServlet{
 	
         
         String sql;
-        sql="select  * from  usluga";
+        sql="select * from  usluga";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
@@ -122,7 +161,8 @@ public class UslugaView extends HttpServlet{
         
         out.println("<table>");
         
-        out.println("<a href=usluge.html>vrati se nazad na unos usluga</a>");
+ out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
+        
         
         
         

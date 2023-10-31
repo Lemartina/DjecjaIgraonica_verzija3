@@ -139,7 +139,7 @@ public class WebObrazac extends HttpServlet{
 //      TABLICA USLUGA
 
         String sql;
-        sql="select  * from  usluga";
+        sql="select * from  usluga";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
@@ -174,7 +174,7 @@ public class WebObrazac extends HttpServlet{
         
         out.println("<table>");
         
-        out.println("<a href=usluge.html>vrati se nazad na unos usluga</a>");
+        out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
         
         
         
