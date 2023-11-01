@@ -135,12 +135,13 @@ public class DjelatnikView extends HttpServlet{
         
              
         
-        out.println("<table cellspacing='0' width='350px' border='1'>");
+        
         out.println("<tr>");
-        out.println("<td> Cijena</td>");
-        out.println("<td> Jedinica mjere</td>");
-        out.println("<td> Količina</td>");
-        out.println("<td> Naziv</td>");
+        out.println("<td> Ime</td>");
+        out.println("<td> Prezime</td>");
+        out.println("<td> Oib</td>");
+        out.println("<td> IBAN</td>");
+        out.println("<td> Radno mjesto</td>");
         out.println("<td> Uredi</td>");
         out.println("<td> Briši</td>");
         

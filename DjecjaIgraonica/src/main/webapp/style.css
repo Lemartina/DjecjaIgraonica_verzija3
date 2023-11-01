@@ -17,7 +17,7 @@ body
 
 .menu-bar
 {
-    background: rgb(0,100,0);
+    background: rgb(14, 37, 97);
     text-align: center;
     
 }
@@ -40,7 +40,7 @@ body
 
 .active, .menu-bar ul li:hover
 {
-    background: #2bab0d;
+    background: #0e253f;
     border-radius: 3px;
 }
 
@@ -53,7 +53,7 @@ body
 {
     display: block;
     position: absolute;
-    background: rgb(0,100,0);
+    background: #0e253f;
     margin-top: 15px;
     margin-left: -15px;
 }
