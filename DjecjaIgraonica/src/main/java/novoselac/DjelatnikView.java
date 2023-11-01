@@ -71,7 +71,7 @@ public class DjelatnikView extends HttpServlet{
         PrintWriter out= response.getWriter();
        
          
-        //OBRAZAC ZA POPUNJAVANJE TABLICE DJELATNICI
+        //OBRAZAC ZA POPUNJAVANJE TABLICE DJELATNIKA
 
         
         out.println("<div class=\"index-intro\"> \n" +
@@ -79,8 +79,7 @@ public class DjelatnikView extends HttpServlet{
 "			<h1>Djelatnici</h1>\n" +
 "			<form action=\"JavaServletDjelatnici\" method=\"post\" novalidate>\n" +
 "                            \n" +
-"                                 \n" +
-"                   <textarea name=\"message\"> Popis djelatnika </textarea>\n" +
+"                                 \n"+
 "                   <br><br>\n" +
 "                <div>\n" +
 "                   <input type=\"text\" id=\"ime\" name= \"ime\" placeholder='Ime'>\n" +
@@ -104,14 +103,14 @@ public class DjelatnikView extends HttpServlet{
 "                </div>\n" +
 "                               \n" +
 "                 <div>\n" +
-"                   <input type=\"text\" id=\"radnoMjeato\" name= \"radnoMjesto\" placeholder='Radno mjesto'>\n" +
+"                   <input type=\"text\" id=\"radnoMjesto\" name= \"radnoMjesto\" placeholder='Radno mjesto'>\n" +
 "                   <br><br>\n" +
 "                </div>");
         
                   out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
         
         
-
+//TABLICA
        //jdbc connection
 
        	try {
@@ -135,12 +134,12 @@ public class DjelatnikView extends HttpServlet{
         
              
         
-        
+        out.println("<table cellspacing='0' width='350px' border='1'>");
         out.println("<tr>");
         out.println("<td> Ime</td>");
         out.println("<td> Prezime</td>");
         out.println("<td> Oib</td>");
-        out.println("<td> IBAN</td>");
+        out.println("<td> Iban</td>");
         out.println("<td> Radno mjesto</td>");
         out.println("<td> Uredi</td>");
         out.println("<td> Briši</td>");
@@ -157,23 +156,14 @@ public class DjelatnikView extends HttpServlet{
             out.println("<td>" + rs.getString("oib")+"</td>");
             out.println("<td>" + rs.getString("iban")+"</td>");
             out.println("<td>" + rs.getString("radnoMjesto")+"</td>");
-         out.println("<td>" +"<a href='DodajDjelatnika.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
+            out.println("<td>" +"<a href=urediDjelatnika.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
+            out.println("<td>" +"<a href=brisiDjelatnika.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
        out.println("</tr>");
         }
         
         out.println("<table>");
         
  out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
 

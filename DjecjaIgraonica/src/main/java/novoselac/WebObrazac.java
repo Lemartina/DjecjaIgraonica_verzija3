@@ -167,7 +167,7 @@ public class WebObrazac extends HttpServlet{
             out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
             out.println("<td>" + rs.getString("kolicina")+"</td>");
             out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td>" +"<a href='DodajUsluge.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
+            out.println("<td>" +"<a href=dodajUsluge.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
    
        out.println("</tr>");
         }

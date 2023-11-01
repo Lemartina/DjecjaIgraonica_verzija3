@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  */
 
 
-@WebServlet("/ObradaPosjeteDijete")
-public class ObradaPosjetaDijete extends HttpServlet{
+@WebServlet("/ObradaPosjetaDjelatnik")
+public class ObradaPosjetaDjelatnik extends HttpServlet{
     
 
     /**
@@ -83,7 +83,7 @@ public class ObradaPosjetaDijete extends HttpServlet{
 	
         
         String sql;
-        sql="select  * from  dijete limit10";
+        sql="select * from posjeta where djelatnik_sifra is null limit 3";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
@@ -97,11 +97,9 @@ public class ObradaPosjetaDijete extends HttpServlet{
         
         out.println("<table cellspacing='0' width='350px' border='1'>");
         out.println("<tr>");
-        out.println("<td> Ime</td>");
-        out.println("<td> Prezime</td>");
-        out.println("<td> Oib</td>");
-        out.println("<td> Ime roditelja</td>");
-        out.println("<td> Telefon roditelja</td>");
+        out.println("<td> Datum i vrijeme dolaska</td>");
+        out.println("<td> Datum i vrijeme odlaska</td>");
+        out.println("<td> Npomena</td>");
         out.println("<td> Uredi</td>");
         out.println("<td> Briši</td>");
         
@@ -111,19 +109,17 @@ public class ObradaPosjetaDijete extends HttpServlet{
         
         while (rs.next()) {
             out.println("<tr>");
-            out.println("<td>" + rs.getString("ime")+"</td>" );
-            out.println("<td>" + rs.getString("prezime")+"</td>" );
-            out.println("<td>" + rs.getString("oib")+"</td>");
-            out.println("<td>" + rs.getString("imeRoditelja")+"</td>");
-             out.println("<td>" + rs.getString("telefonRoditelja")+"</td>");
-            out.println("<td>" +"<a href='UrediUsluge.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
-            out.println("<td>" +"<a href=BrisiUsluge.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
+            out.println("<td>" + rs.getString("datumVrijemeDolaska")+"</td>" );
+            out.println("<td>" + rs.getString("datumVrijemeOdlaska")+"</td>" );
+            out.println("<td>" + rs.getString("napomena")+"</td>");
+            out.println("<td>" +"<a href='urediPosjetu.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
+            out.println("<td>" +"<a href='brisiPosjetu.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
        out.println("</tr>");
         }
         
         out.println("<table>");
         
-        out.println("<a href=usluge.html>vrati se nazad na unos usluga</a>");
+        out.println("<a href=index.html>vrati se nazad na glvani izbornik</a>");
         
         
         
@@ -138,7 +134,7 @@ public class ObradaPosjetaDijete extends HttpServlet{
 
 
 		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Dijete.class.getName());
+              Logger.getLogger(novoselac.model.Posjeta.class.toString());
 			out.println(ex);
 
          
