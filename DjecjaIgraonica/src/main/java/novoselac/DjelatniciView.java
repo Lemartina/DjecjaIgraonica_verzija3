@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  */
 
 
-@WebServlet("/ObradaPosjetaDjelatnik")
-public class ObradaPosjetaDjelatnik extends HttpServlet{
+@WebServlet("/DjelatniciView")
+public class DjelatniciView extends HttpServlet{
     
 
     /**
@@ -71,7 +71,50 @@ public class ObradaPosjetaDjelatnik extends HttpServlet{
         PrintWriter out= response.getWriter();
        
          
+        //OBRAZAC ZA POPUNJAVANJE TABLICE USLUGA
 
+        
+        out.println(" <div class=\"index-intro\"> \n" +
+"		<div class=\"wrapper\">\n" +
+"			<h1>Djelatnici</h1>\n" +
+"			<form action=\"JavaServletDjelatnici\" method=\"post\" novalidate>\n" +
+"                            \n" +
+"                                 \n" +
+"                          <br><br>\n" +
+"                <div>\n" +
+"                   <input type=\"text\" id=\"ime\" name= \"ime\" placeholder='Ime'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"text\" id=\"prezime\" name= \"prezime\" placeholder='Prezime'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"       \n" +
+"                <div>\n" +
+"                   <input type=\"text\" id=\"oib\" name= \"oib\" placeholder='Oib'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"               \n" +
+"                            \n" +
+"                 <div>\n" +
+"                   <input type=\"text\" id=\"iban\" name= \"iban\" placeholder='Iban'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                               \n" +
+"                 <div>\n" +
+"                   <input type=\"text\" id=\"radnoMjeato\" name= \"radnoMjesto\" placeholder='Radno mjesto'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                  <br><br>\n" +
+"                          </form>\n" +
+"		</div>\n" +
+"	</div>");
+        
+                  out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
+        
+        
+//TABLICA
        //jdbc connection
 
        	try {
@@ -83,48 +126,50 @@ public class ObradaPosjetaDjelatnik extends HttpServlet{
 	
         
         String sql;
-        sql="select * from posjeta where djelatnik_sifra is null limit 3";
+        sql="select * from  djelatnik";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
         
-        
- 
-        
-       
-        
+           
              
         
         out.println("<table cellspacing='0' width='350px' border='1'>");
         out.println("<tr>");
-        out.println("<td> Datum i vrijeme dolaska</td>");
-        out.println("<td> Datum i vrijeme odlaska</td>");
-        out.println("<td> Npomena</td>");
+        out.println("<td> Iban</td>");
+        out.println("<td> Ime</td>");
+        out.println("<td> Oib</td>");
+        out.println("<td> Prezime</td>");
+        out.println("<td> Radno mjesto</td>");
         out.println("<td> Uredi</td>");
         out.println("<td> Briši</td>");
         
         out.println("</tr>");
         
-        
+       
+       
         
         while (rs.next()) {
             out.println("<tr>");
-            out.println("<td>" + rs.getString("datumVrijemeDolaska")+"</td>" );
-            out.println("<td>" + rs.getString("datumVrijemeOdlaska")+"</td>" );
-            out.println("<td>" + rs.getString("napomena")+"</td>");
-            out.println("<td>" +"<a href='urediPosjetu.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
-            out.println("<td>" +"<a href='brisiPosjetu.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
+            out.println("<td>" + rs.getString("iban")+"</td>" );
+            out.println("<td>" + rs.getString("ime")+"</td>" );
+            out.println("<td>" + rs.getString("oib")+"</td>");
+            out.println("<td>" + rs.getString("prezime")+"</td>");
+            out.println("<td>" + rs.getString("radnoMjesto")+"</td>");
+            out.println("<td>" +"<a href=UrediDjelatnike.html"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
+            out.println("<td>" +"<a href=BrisiDjelatnike.html"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
        out.println("</tr>");
         }
         
         out.println("<table>");
         
-        out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
+ out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
+        
         
 
 
 		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Posjeta.class.toString());
+              Logger.getLogger(novoselac.model.Djelatnik.class.getName());
 			out.println(ex);
 
          
