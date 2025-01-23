@@ -4,7 +4,6 @@
  */
 package novoselac;
 
-import java.sql.*;//1
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -81,6 +80,7 @@ public class JavaServlet extends HttpServlet {
 	//3
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
+        
 	Statement st = con.createStatement();
         st.executeUpdate("insert into usluga(naziv,jedinicaMjere, cijena, kolicina ) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");

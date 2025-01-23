@@ -154,8 +154,8 @@ public class UslugaView extends HttpServlet{
             out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
             out.println("<td>" + rs.getString("kolicina")+"</td>");
             out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td>" +"<a href=PromjeniUslugu"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
-            out.println("<td>" +"<a href=BrisiUslugu"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
+            out.println("<td>" +"<a href=PromjeniUslugu?naziv"+ rs.getString("naziv")+"'>Uredi</a>" +"</td>");
+            out.println("<td>" +"<a href=BrisiUslugu?naziv"+ rs.getString("naziv")+" '>Briši</a>" +"</td>");
        out.println("</tr>");
         }
         

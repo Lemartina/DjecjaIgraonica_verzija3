@@ -11,25 +11,39 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
+import jakarta.servlet.annotation.WebServlet; // or javax.*
+
+
+
 
 
 /**
  *
  * @author Administrator
  */
+
+
+@WebServlet("/BrisiUslugu")
 public class BrisiUslugu extends HttpServlet{
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    Connection con;
+    PreparedStatement pst;
+    
+    
+     public void doGet(HttpServletRequest req, HttpServletResponse rsp)
             throws ServletException, IOException {
         
-        response.setContentType("text/html");
-        PrintWriter out= response.getWriter();
+         
+                 
+        rsp.setContentType("text/html");
+        PrintWriter out= rsp.getWriter();
        
          
+      String naziv = req.getParameter("naziv");
+        
 //TABLICA
        //jdbc connection
 
@@ -37,35 +51,24 @@ public class BrisiUslugu extends HttpServlet{
          //2b
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	//3
-        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
-	
-        
-        String sql;
-        sql="select * from  usluga";
-        Statement stmt = con.createStatement();
-        ResultSet rs;
-        rs=stmt.executeQuery(sql);
-        
-        
- 
-        
+         con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
+	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");                          
+         pst = con.prepareStatement("delete from usluga where naziv = ?");
+         pst.setString(4, naziv);
+         pst.executeUpdate();
        
+         out.println("<font color='green'> Obrisanooooo</font>");
+               
+         	} catch (ClassNotFoundException ex) {
+			Logger.getLogger(novoselac.model.Usluga.class.getName())
+                             //   .log(Level.SEVERE, null, ex)
+                                ;
+                        out.println(ex);
         
-             
-        
-      
-		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Usluga.class.getName());
-			out.println(ex);
-
-         
-		}
-	catch(SQLException ex){
-            out.println("<font color= 'red'> Record Failed </fornt>");
-        }
-        
+		}catch (SQLException ex) {
+                    out.println("<font color ='red'>  Record Failed </font>");
+                }
 	
-  }
-    
-}
+     }}
+	
+ 
