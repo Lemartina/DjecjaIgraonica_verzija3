@@ -4,6 +4,7 @@
  */
 package novoselac;
 
+
 import java.sql.*;//1
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,9 +60,9 @@ public class JavaServletDjelatnici extends HttpServlet {
         PrintWriter out= response.getWriter();
         String ime = request.getParameter("ime");
         String prezime = request.getParameter("prezime");
-        String oib= request.getParameter("oib");
-        String iban= request.getParameter("iban");
-    String radnoMjesto= request.getParameter("radnoMjesto");
+        String oib = request.getParameter("oib");
+        String iban = request.getParameter("iban");
+    String radnoMjesto = request.getParameter("radnoMjesto");
          
 
        //jdbc connection
@@ -74,11 +75,11 @@ public class JavaServletDjelatnici extends HttpServlet {
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into djelatnik(ime,prezime, oib, iban, radnoMjesto ) "
+        st.executeUpdate("insert into djelatnik(ime, prezime, oib, iban, radnoMjesto ) "
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+iban+"', '"+radnoMjesto+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href=DjelatnikView>Nazad na djelanika</a>");
+                           out.println("<a href = DjelatnikView > Nazad na djelanika </a>");
                 
 			
 st.close();

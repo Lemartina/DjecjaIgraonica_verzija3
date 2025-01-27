@@ -4,6 +4,7 @@
  */
 package novoselac;
 
+import java.sql.*;//1
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -64,10 +65,10 @@ public class JavaServlet extends HttpServlet {
         
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
-        String naziv =request.getParameter("naziv");
+        String naziv = request.getParameter("naziv");
         String jedinicaMjere = request.getParameter("jedinicaMjere");
-        String cijena= request.getParameter("cijena");
-        String kolicina= request.getParameter("kolicina");
+        String cijena = request.getParameter("cijena");
+        String kolicina = request.getParameter("kolicina");
   
          
 
@@ -82,7 +83,7 @@ public class JavaServlet extends HttpServlet {
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
         
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into usluga(naziv,jedinicaMjere, cijena, kolicina ) "
+        st.executeUpdate("insert into usluga(naziv, jedinicaMjere, cijena, kolicina ) "
                 + "values ('"+naziv+"', '"+jedinicaMjere+"', '"+cijena+"', '"+kolicina+"')");
                         
                         out.println("Podaci uspjepšno uneseni!");
