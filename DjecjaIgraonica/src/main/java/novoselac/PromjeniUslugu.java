@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -34,7 +35,7 @@ public class PromjeniUslugu extends HttpServlet{
    int row;
    
  
-    public void doPost(HttpServletRequest req, HttpServletResponse rsp)
+    public void doGet(HttpServletRequest req, HttpServletResponse rsp)
             throws ServletException, IOException {
         
         rsp.setContentType("text/html");
@@ -52,24 +53,25 @@ public class PromjeniUslugu extends HttpServlet{
         con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	
-  
+             String sifra = req.getParameter("sifra");
              String cijena = req.getParameter("cijena");
              String jedinicaMjere  = req.getParameter("jedinicaMjere");
              String kolicina = req.getParameter("kolicina");
              String naziv = req.getParameter("naziv");
              
-             pst = con.prepareStatement("update usluga set cijena = ?, jedinicaMjere = ?, jedinicaMjere = ?where naziv = ?");
-             pst.setString(1, cijena);
-             pst.setString(2, jedinicaMjere);
-             pst.setString(3, kolicina);
-             pst.setString(4, naziv);
+             pst = con.prepareStatement("update usluga set sifra = ?, cijena = ?, jedinicaMjere = ?, jedinicaMjere = ?where naziv = ?");
+             pst.setString(1, sifra);
+             pst.setString(2, cijena);
+             pst.setString(3, jedinicaMjere);
+             pst.setString(4, kolicina);
+             pst.setString(5, naziv);
              
              row = pst.executeUpdate();
              
               out.println("<font color='green'>  Record Updateeeedd   </font>");
    
         } catch (ClassNotFoundException ex) {
-            Logger logger = Logger.getLogger(novoselac.model.Usluga.class.getName());
+            Logger.getLogger(novoselac.model.Usluga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
            
              out.println("<font color='red'>  Record Failed   </font>");
