@@ -33,7 +33,7 @@ public class PromjeniUslugu extends HttpServlet{
    PreparedStatement pst;
    int row;
    
-   @Override
+ 
     public void doPost(HttpServletRequest req, HttpServletResponse rsp)
             throws ServletException, IOException {
         
