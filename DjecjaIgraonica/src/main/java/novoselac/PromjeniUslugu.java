@@ -68,13 +68,13 @@ public class PromjeniUslugu extends HttpServlet{
              
              row = pst.executeUpdate();
              
-              out.println("<font color='green'>  Record Updateeeedd   </font>");
+              out.println("<font color='green'>  Uređivanje je uspjelo!   </font>");
    
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(novoselac.model.Usluga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
            
-             out.println("<font color='red'>  Record Failed   </font>");
+             out.println("<font color='red'>  Uređivanje usluge nije uspjelo!   </font>");
  
         }
 
