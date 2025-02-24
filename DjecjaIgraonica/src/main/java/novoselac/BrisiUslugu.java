@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package novoselac;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -12,11 +11,11 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServlet;
-import jakarta.servlet.annotation.WebServlet; // or javax.*
-
 
 
 
@@ -29,8 +28,10 @@ import jakarta.servlet.annotation.WebServlet; // or javax.*
 
 @WebServlet("/BrisiUslugu")
 public class BrisiUslugu extends HttpServlet{
-    Connection con;
+  Connection con;
     PreparedStatement pst;
+    ResultSet rs;
+    int row;
     
     
      public void doGet(HttpServletRequest req, HttpServletResponse rsp)
@@ -54,10 +55,10 @@ public class BrisiUslugu extends HttpServlet{
          con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");                          
          pst = con.prepareStatement("delete from usluga where naziv = ?");
-         pst.setString(4, naziv);
-         pst.executeUpdate();
+         pst.setString(5, naziv);
+         row = pst.executeUpdate();
        
-         out.println("<font color='green'> Obrisanooooo</font>");
+         out.println("<font color='green'> Obrisanooooo </font>");
                
          	} catch (ClassNotFoundException ex) {
 			Logger.getLogger(novoselac.model.Usluga.class.getName())

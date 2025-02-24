@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package novoselac;
 
 import jakarta.servlet.ServletException;
@@ -33,7 +29,7 @@ public class PromjeniUslugu extends HttpServlet{
    Connection con;
    PreparedStatement pst;
    int row;
-   
+   ResultSet rs;
  
     public void doGet(HttpServletRequest req, HttpServletResponse rsp)
             throws ServletException, IOException {
@@ -59,7 +55,8 @@ public class PromjeniUslugu extends HttpServlet{
              String kolicina = req.getParameter("kolicina");
              String naziv = req.getParameter("naziv");
              
-             pst = con.prepareStatement("update usluga set sifra = ?, cijena = ?, jedinicaMjere = ?, jedinicaMjere = ?where naziv = ?");
+                         
+             pst = con.prepareStatement("update usluga set sifra = ?, cijena = ?, jedinicaMjere = ?, kolicina = ? where naziv = ?");
              pst.setString(1, sifra);
              pst.setString(2, cijena);
              pst.setString(3, jedinicaMjere);

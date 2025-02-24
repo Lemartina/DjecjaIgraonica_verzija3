@@ -122,7 +122,8 @@ public class UslugaView extends HttpServlet{
 	
         
         String sql;
-        sql="select * from  usluga";
+        
+        sql= "select * from  usluga";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
