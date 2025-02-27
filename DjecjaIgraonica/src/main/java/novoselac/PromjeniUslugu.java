@@ -41,12 +41,17 @@ public class PromjeniUslugu extends HttpServlet {
 
             if (row > 0) {
                 out.println("<font color='green'> Uređivanje je uspjelo! </font>");
+                 out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
             } else {
                 out.println("<font color='red'> Nema usluge s tim nazivom </font>");
+                 out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
             }
         } catch (SQLException ex) {
             out.println("<font color='red'> Uređivanje usluge nije uspjelo! </font>");
+            out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
             ex.printStackTrace();
+            
+            
         }
     }
 }
