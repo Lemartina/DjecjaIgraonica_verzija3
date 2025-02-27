@@ -8,6 +8,19 @@
         <servlet-name>javaServlet</servlet-name>
         <url-pattern>/javaServlet</url-pattern>
     </servlet-mapping>
+    
+    
+     <!-- Definicija za BrisiUslugu -->
+    <servlet>
+        <servlet-name>brisiUslugu</servlet-name>
+        <servlet-class>novoselac.BrisiUslugu</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>brisiUslugu</servlet-name>
+        <url-pattern>/brisiUslugu</url-pattern>
+    </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30
