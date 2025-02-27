@@ -55,14 +55,17 @@ public class BrisiUslugu extends HttpServlet{
          con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");                          
          pst = con.prepareStatement("delete from usluga where naziv = ?");
+         
          pst.setString(5, naziv);
+         
          row = pst.executeUpdate();
        
+          
          out.println("<font color='green'> Obrisanooooo </font>");
                
          	} catch (ClassNotFoundException ex) {
 			Logger.getLogger(novoselac.model.Usluga.class.getName())
-                             //   .log(Level.SEVERE, null, ex)
+                             .log(Level.SEVERE, null, ex)
                                 ;
                         out.println(ex);
         
