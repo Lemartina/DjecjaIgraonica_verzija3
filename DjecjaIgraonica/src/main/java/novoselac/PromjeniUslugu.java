@@ -10,71 +10,43 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Administrator
- */
-
-
 @WebServlet("/PromjeniUslugu")
-public class PromjeniUslugu extends HttpServlet{
-    
+public class PromjeniUslugu extends HttpServlet {
 
-   Connection con;
-   PreparedStatement pst;
-   int row;
-   ResultSet rs;
- 
-    public void doGet(HttpServletRequest req, HttpServletResponse rsp)
-            throws ServletException, IOException {
-        
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException {
         rsp.setContentType("text/html");
-        PrintWriter out= rsp.getWriter();
-       
-         
-     
-//TABLICA
-       //jdbc connection
+        PrintWriter out = rsp.getWriter();
 
-       	try {
-         //2b
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	//3
-        con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
-	
-             String sifra = req.getParameter("sifra");
-             String cijena = req.getParameter("cijena");
-             String jedinicaMjere  = req.getParameter("jedinicaMjere");
-             String kolicina = req.getParameter("kolicina");
-             String naziv = req.getParameter("naziv");
-             
-                         
-             pst = con.prepareStatement("update usluga set sifra = ?, cijena = ?, jedinicaMjere = ?, kolicina = ? where naziv = ?");
-             pst.setString(1, sifra);
-             pst.setString(2, cijena);
-             pst.setString(3, jedinicaMjere);
-             pst.setString(4, kolicina);
-             pst.setString(5, naziv);
-             
-             row = pst.executeUpdate();
-             
-              out.println("<font color='green'>  Uređivanje je uspjelo!   </font>");
-   
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(novoselac.model.Usluga.class.getName()).log(Level.SEVERE, null, ex);
+        String sifra = req.getParameter("sifra");
+        String cijena = req.getParameter("cijena");
+        String jedinicaMjere = req.getParameter("jedinicaMjere");
+        String kolicina = req.getParameter("kolicina");
+        String naziv = req.getParameter("naziv");
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
+             PreparedStatement pst = con.prepareStatement("UPDATE usluga SET sifra = ?, cijena = ?, jedinicaMjere = ?, kolicina = ? WHERE naziv = ?")) {
+
+            pst.setString(1, sifra);
+            pst.setString(2, cijena);
+            pst.setString(3, jedinicaMjere);
+            pst.setString(4, kolicina);
+            pst.setString(5, naziv);
+
+            int row = pst.executeUpdate();
+
+            if (row > 0) {
+                out.println("<font color='green'> Uređivanje je uspjelo! </font>");
+            } else {
+                out.println("<font color='red'> Nema usluge s tim nazivom </font>");
+            }
         } catch (SQLException ex) {
-           
-             out.println("<font color='red'>  Uređivanje usluge nije uspjelo!   </font>");
- 
+            out.println("<font color='red'> Uređivanje usluge nije uspjelo! </font>");
+            ex.printStackTrace();
         }
-
     }
-  
 }
