@@ -48,6 +48,7 @@ public class BrisiUslugu extends HttpServlet {
 
                 if (row > 0) {
                     out.println("<font color='green'> Usluga je uspješno obrisana. </font>");
+                     out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
                 } else {
                     out.println("<font color='red'> Nema usluge s tim nazivom. </font>");
                 }
