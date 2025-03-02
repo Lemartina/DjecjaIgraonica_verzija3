@@ -27,6 +27,7 @@ public class BrisiUslugu extends HttpServlet {
             // Provjeri je li naziv proslijeđen
             if (naziv == null || naziv.trim().isEmpty()) {
                 out.println("<font color='red'> Naziv usluge nije proslijeđen. </font>");
+                out.println("<a href=UslugaView>Nazad na usluge</a>");
                 return;
             }
 
@@ -36,6 +37,7 @@ public class BrisiUslugu extends HttpServlet {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(BrisiUslugu.class.getName()).log(Level.SEVERE, "MySQL JDBC Driver nije pronađen", ex);
                 out.println("<font color='red'> Greška u konfiguraciji sustava. </font>");
+                out.println("<a href=UslugaView>Nazad na usluge</a>");
                 return;
             }
 
@@ -48,13 +50,17 @@ public class BrisiUslugu extends HttpServlet {
 
                 if (row > 0) {
                     out.println("<font color='green'> Usluga je uspješno obrisana. </font>");
-                     out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
+                    out.println("<a href=UslugaView>Nazad na usluge</a>");
                 } else {
                     out.println("<font color='red'> Nema usluge s tim nazivom. </font>");
+                    out.println("<a href=UslugaView>Nazad na usluge</a>");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BrisiUslugu.class.getName()).log(Level.SEVERE, "Greška pri brisanju usluge", ex);
-                out.println("<font color='red'> Brisanje nije uspjelo. Pokušajte ponovno. </font>");
+                out.println("<font color='red'> Brisanje nije uspjelo jer postoje zavisni podaci. Usluga je već dodana na posjetu. </font>");
+                out.println("<a href=UslugaView>Nazad na usluge</a>");
+                
+                out.println("<a href=UslugaView>Nazad na usluge</a>");
             }
         }
     }
