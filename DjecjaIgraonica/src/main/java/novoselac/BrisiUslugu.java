@@ -60,6 +60,16 @@ public class BrisiUslugu extends HttpServlet {
                 out.println("<font color='red'> Brisanje nije uspjelo jer postoje zavisni podaci. Usluga je već dodana na posjetu. </font>");
                 out.println("<a href=UslugaView>Nazad na usluge</a>");
                 
+                /*
+Provjera zavisnih podataka u bazi
+SELECT a.naziv, c.datumVrijemeDolaska
+FROM usluga a
+INNER JOIN uslugaposjeta b ON a.sifra = b.usluga
+INNER JOIN posjeta c ON b.posjeta = c.sifra
+ORDER BY c.datumVrijemeDolaska DESC;
+                */
+                
+                
                 out.println("<a href=UslugaView>Nazad na usluge</a>");
             }
         }
