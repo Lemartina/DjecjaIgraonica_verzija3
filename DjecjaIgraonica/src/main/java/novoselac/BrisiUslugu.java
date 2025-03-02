@@ -71,6 +71,8 @@ ORDER BY c.datumVrijemeDolaska DESC;
                 
                 
                 out.println("<a href=UslugaView>Nazad na usluge</a>");
+                
+                
             }
         }
     }

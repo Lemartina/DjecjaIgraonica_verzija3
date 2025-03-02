@@ -45,7 +45,7 @@ public class DjelatnikView extends HttpServlet{
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet javaServlet</title>");            
+            out.println("<title>Servlet javaServletDjelatnici</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");

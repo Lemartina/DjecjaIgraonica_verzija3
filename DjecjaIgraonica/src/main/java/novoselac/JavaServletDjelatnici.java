@@ -1,124 +1,73 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package novoselac;
 
-
-import java.sql.*;//1
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
-
-/**
- *
- * @author Administrator
- */
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @WebServlet("/JavaServletDjelatnici")
 public class JavaServletDjelatnici extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-         
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         response.setContentType("text/html");
-        PrintWriter out= response.getWriter();
+        PrintWriter out = response.getWriter();
+
         String ime = request.getParameter("ime");
         String prezime = request.getParameter("prezime");
         String oib = request.getParameter("oib");
         String iban = request.getParameter("iban");
-    String radnoMjesto = request.getParameter("radnoMjesto");
-         
+        String radnoMjesto = request.getParameter("radnoMjesto");
 
-       //jdbc connection
-       //https://www.youtube.com/watch?v=y_YxwyYRJek
-       //https://www.youtube.com/watch?v=5vzCjvUwMXg
-       	try {
-         //2b
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	//3
-        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
-	Statement st = con.createStatement();
-        st.executeUpdate("insert into djelatnik(ime, prezime, oib, iban, radnoMjesto ) "
-                + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+iban+"', '"+radnoMjesto+"')");
-                        
-                        out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href = DjelatnikView > Nazad na djelanika </a>");
-                
-			
-st.close();
-con.close();
+        // Validacija korisničkog unosa
+        if (ime == null || ime.trim().isEmpty() ||
+            prezime == null || prezime.trim().isEmpty() ||
+            oib == null || oib.trim().isEmpty() ||
+            iban == null || iban.trim().isEmpty() ||
+            radnoMjesto == null || radnoMjesto.trim().isEmpty()) {
+            out.println("<font color='red'> Svi podaci su obavezni. </font>");
+            return;
+        }
 
+        // SQL upit s PreparedStatement
+        String sql = "INSERT INTO djelatnik (ime, prezime, oib, iban, radnoMjesto) VALUES (?, ?, ?, ?, ?)";
 
-		} catch (Exception e) {
-			out.println(e);
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
+             PreparedStatement pst = con.prepareStatement(sql)) {
 
-         
-		}
-	
-        
-	
-  }
-    
-  
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+            pst.setString(1, ime);
+            pst.setString(2, prezime);
+            pst.setString(3, oib);
+            pst.setString(4, iban);
+            pst.setString(5, radnoMjesto);
+
+            int row = pst.executeUpdate();
+
+            if (row > 0) {
+                out.println("Podaci uspješno uneseni!");
+                out.println("<a href='DjelatnikView'> Nazad na djelatnika </a>");
+            } else {
+                out.println("<font color='red'> Unos podataka nije uspio. </font>");
+            }
+
+        } catch (SQLException e) {
+            out.println("<font color='red'> Greška pri unosu podataka: " + e.getMessage() + " </font>");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      doGet(request, response);
+        doGet(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

@@ -21,6 +21,15 @@
     </servlet-mapping>
     
     
+      <!-- Definicija za izbornik djelatnici -->
+    <servlet>
+    <servlet-name>javaServletDjelatnici</servlet-name>
+    <servlet-class>novoselac.JavaServletDjelatnici</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>javaServletDjelatnici</servlet-name>
+    <url-pattern>/javaServletDjelatnici</url-pattern>
+</servlet-mapping>
     <session-config>
         <session-timeout>
             30
