@@ -27,7 +27,7 @@ public class JavaServletDjelatnici extends HttpServlet {
         String oib = request.getParameter("oib");
         String iban = request.getParameter("iban");
         String radnoMjesto = request.getParameter("radnoMjesto");
-
+/*
         // Validacija korisničkog unosa
         if (ime == null || ime.trim().isEmpty() ||
             prezime == null || prezime.trim().isEmpty() ||
@@ -36,7 +36,7 @@ public class JavaServletDjelatnici extends HttpServlet {
             radnoMjesto == null || radnoMjesto.trim().isEmpty()) {
             out.println("<font color='red'> Svi podaci su obavezni. </font>");
             return;
-        }
+        }*/
 
         // SQL upit s PreparedStatement
         String sql = "INSERT INTO djelatnik (ime, prezime, oib, iban, radnoMjesto) VALUES (?, ?, ?, ?, ?)";
@@ -54,7 +54,7 @@ public class JavaServletDjelatnici extends HttpServlet {
 
             if (row > 0) {
                 out.println("Podaci uspješno uneseni!");
-                out.println("<a href='DjelatnikView'> Nazad na djelatnika </a>");
+                out.println("<a href='DjelatniciView'> Nazad na djelatnika </a>");
             } else {
                 out.println("<font color='red'> Unos podataka nije uspio. </font>");
             }

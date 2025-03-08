@@ -20,6 +20,15 @@
         <url-pattern>/brisiUslugu</url-pattern>
     </servlet-mapping>
     
+       <!-- Definicija za BrisiDjelatnika -->
+    <servlet>
+        <servlet-name>brisiDjelatnika</servlet-name>
+        <servlet-class>novoselac.BrisiDjelatnika</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>brisiDjelatnika</servlet-name>
+        <url-pattern>/brisiDjelatnika</url-pattern>
+    </servlet-mapping>
     
       <!-- Definicija za izbornik djelatnici -->
     <servlet>
