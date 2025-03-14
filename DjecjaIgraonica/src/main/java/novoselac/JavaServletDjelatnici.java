@@ -27,16 +27,6 @@ public class JavaServletDjelatnici extends HttpServlet {
         String oib = request.getParameter("oib");
         String iban = request.getParameter("iban");
         String radnoMjesto = request.getParameter("radnoMjesto");
-/*
-        // Validacija korisničkog unosa
-        if (ime == null || ime.trim().isEmpty() ||
-            prezime == null || prezime.trim().isEmpty() ||
-            oib == null || oib.trim().isEmpty() ||
-            iban == null || iban.trim().isEmpty() ||
-            radnoMjesto == null || radnoMjesto.trim().isEmpty()) {
-            out.println("<font color='red'> Svi podaci su obavezni. </font>");
-            return;
-        }*/
 
         // SQL upit s PreparedStatement
         String sql = "INSERT INTO djelatnik (ime, prezime, oib, iban, radnoMjesto) VALUES (?, ?, ?, ?, ?)";
