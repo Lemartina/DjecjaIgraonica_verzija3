@@ -1,56 +1,49 @@
-*
-{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
 }
 
-
-body
-{
-    background-image: url(djecjaigraonica.jpg);
-    background-size: cover;
-    background-position: center;
+body {
+    background-image: url(C:\Users\Administrator\Documents\GitHub\DjecjaIgraonica_verzija3\DjecjaIgraonica\src\main\resources\djecjaigraonica.jpg); /* Provjerite putanju */
+    background-size: cover; /* Pokriva cijelu pozadinu */
+    background-position: center; /* Centrira sliku */
+    background-color: #f0f0f0; /* Fallback boja */
     box-sizing: border-box;
     font-family: sans-serif;
-
 }
 
-.menu-bar
-{
+.menu-bar {
     background: rgb(14, 37, 97);
     text-align: center;
-    
 }
-.menu-bar ul{
+
+.menu-bar ul {
     display: inline-flex;
     list-style: none;
     color: #fff;
 }
-.menu-bar ul li{
-    width:120px;
-    margin:15px;
+
+.menu-bar ul li {
+    width: 120px;
+    margin: 15px;
     padding: 15px;
 }
 
-.menu-bar ul li a
-{
+.menu-bar ul li a {
     text-decoration: none;
     color: #fff;
 }
 
-.active, .menu-bar ul li:hover
-{
+.active, .menu-bar ul li:hover {
     background: #0e253f;
     border-radius: 3px;
 }
 
-.sub-menu-1
-{
+.sub-menu-1 {
     display: none;
 }
 
-.menu-bar ul li:hover .sub-menu-1
-{
+.menu-bar ul li:hover .sub-menu-1 {
     display: block;
     position: absolute;
     background: #0e253f;
@@ -58,25 +51,24 @@ body
     margin-left: -15px;
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul{
+.menu-bar ul li:hover .sub-menu-1 ul {
     display: block;
     margin: 10px;
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul li{
+.menu-bar ul li:hover .sub-menu-1 ul li {
     width: 150px;
     padding: 10px;
     border-bottom: 1px dotted #ffffff;
     background: transparent;
     border-radius: 0;
     text-align: left;
-       
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul li:last-child{
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
     border-bottom: none;
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul li a:hover{
-    color:#b2ff00;
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+    color: #b2ff00;
 }
