@@ -103,8 +103,8 @@ public class DjelatniciView extends HttpServlet {
                 out.println("<td>" + rs.getString("iban") + "</td>");
                 out.println("<td>" + rs.getString("radnoMjesto") + "</td>");
                   
-               out.println("<td><a href='vratiDjelatnika.html?sifra=" + rs.getInt("sifra") + "'>Uredi</a></td>");
-               out.println("<td><a href='brisiDjelatnika.html?sifra=" + rs.getInt("sifra") + "'>Briši</a></td>");
+               out.println("<td><a href='VratiDjelatnika?sifra=" + rs.getInt("sifra") + "'><i class='fas fa-edit'></i> Uredi</a></td>");
+               out.println("<td><a href='BrisiDjelatnika?sifra=" + rs.getInt("sifra") + "'><i class='fas fa-trash'></i> Briši</a></td>");
                 out.println("</tr>");
             }
 

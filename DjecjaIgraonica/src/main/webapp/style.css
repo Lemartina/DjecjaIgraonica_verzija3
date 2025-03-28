@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url(C:\Users\Administrator\Documents\GitHub\DjecjaIgraonica_verzija3\DjecjaIgraonica\src\main\resources\djecjaigraonica.jpg); /* Provjerite putanju */
+    background-image: url(C:\Users\Administrator\Documents\GitHub\DjecjaIgraonica_verzija3\DjecjaIgraonica\src\main\resources\lav.png); 
     background-size: cover; /* Pokriva cijelu pozadinu */
     background-position: center; /* Centrira sliku */
     background-color: #f0f0f0; /* Fallback boja */
