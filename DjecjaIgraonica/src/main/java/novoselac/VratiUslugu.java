@@ -44,7 +44,7 @@ public class VratiUslugu extends HttpServlet {
                 }
             }
         } catch (SQLException ex) {
-            out.println("<font color='red'> Uređivanje usluge nije uspjelo! Šta nije ok? </font>");
+            out.println("<font color='red'> Uređivanje djelatnika nije uspjelo! Šta nije ok? </font>");
             ex.printStackTrace();
         }
     }
