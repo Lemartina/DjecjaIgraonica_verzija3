@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  */
 
 
-@WebServlet("/WebObrazac")
-public class WebObrazac extends HttpServlet{
+@WebServlet("/OdabirUsluge")
+public class OdabirUsluge extends HttpServlet{
     
 
     /**
@@ -69,64 +69,13 @@ public class WebObrazac extends HttpServlet{
         
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
-       
-        
-//        OBRAZAC ZA POPUNAJVANJE - TABLICA DIJETE, DIJETEPOSJETA,POSJETA, USLUGAPOSJETE, USLUGA
-         out.println("<div class=\"index-intro\"> \n" +
+    
+        out.println("<div class=\"index-intro\"> \n" +
 "		<div class=\"wrapper\">\n" +
 "			<h1>Rezervacija termina za igraonicu</h1>\n" +
-"                 <h2>1. Podaci o djetetu </h2>\n" +
-"			<form action=\"JavaServletDjeca\" method=\"post\" >\n" +
-"                            \n" +
-"                     <!--ovo sve treba staviti u java servlet preko out.println-->          \n" +
-"                   <!--<textarea name=\"message\"> Rezervacija termina za igraonicu </textarea>-->\n" +
-"                   <br><br>\n" +
-"                <div>\n" +
-"                   <input type=\"ime\" id=\"ime\" name= \"ime\" placeholder='Ime djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"prezime\" id=\"prezime\" name= \"prezime\" placeholder='Prezime djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"oib\" id=\"oib\" name= \"oib\" placeholder='OIB djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"               \n" +
-"                            \n" +
-"                 <div>\n" +
-"                   <input type=\"imeRoditelja\" id=\"imeRoditelja\" name= \"imeRoditelja\" placeholder='Ime roditelja'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"\n" +
-"                    <div>\n" +
-"                   <input type=\"telefonRoditelja\" id=\"telefonRoditelja\" name= \"telefonRoditelja\" placeholder='Telefon roditelja'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"                   \n" +
-                 "<div>\n" +
-                 
-"                 <h2>2. Odabir termina </h2>\n" +
-"                   <input type=\"date\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"                   \n" +
-"                    <div>\n" +
-"                   <input type=\"time\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"                   \n" +
-"                <div>\n" +
-"                   <input type=\"message\" id=\"napomena\" name= \"napomena\" placeholder='Napomena'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
+"                 <h2>3. Odabir usluge </h2></div>\n" +
 "                   ");
-
-         
-          out.println("<button type=\"submit\" class=\"btn btn-primary\">Dodaj</button>");
+        
        //jdbc connection
 
        
@@ -150,10 +99,33 @@ public class WebObrazac extends HttpServlet{
         
             
         
+        out.println("<table cellspacing='0' width='350px' border='1'>");
+        out.println("<tr>");
+        out.println("<td> Cijena</td>");
+        out.println("<td> Jedinica mjere</td>");
+        out.println("<td> Količina</td>");
+        out.println("<td> Naziv</td>");
+        out.println("<td> Dodaj</td>");
+      
         
-       
+        out.println("</tr>");
         
-                
+      
+        while (rs.next()) {
+            out.println("<tr>");
+            out.println("<td>" + rs.getString("cijena")+"</td>" );
+            out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
+            out.println("<td>" + rs.getString("kolicina")+"</td>");
+            out.println("<td>" + rs.getString("naziv")+"</td>");
+            out.println("<td>" +"<a href=dodajUsluge.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
+   
+       out.println("</tr>");
+        }
+        
+        out.println("<table>");
+        
+        out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
+        
         
         
 		} catch (ClassNotFoundException ex) {

@@ -77,8 +77,8 @@ public class JavaServletDjeca extends HttpServlet {
         st.executeUpdate("insert into dijete(ime,prezime, oib, imeRoditelja, telefonRoditelja ) "
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
                         
-                        out.println("Podaci uspjepšno uneseni!");
-                           out.println("<a href=WebObrazac>Nazad na dijete</a>");
+                        out.println("Podaci od djetetu i terminu uspješno uneseni!");
+                           out.println("<a href=OdabirUsluge>Nastavi dalje na odabir usluga /a>");
                 
 			
 st.close();
