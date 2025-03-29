@@ -117,8 +117,7 @@ public class OdabirUsluge extends HttpServlet{
             out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
             out.println("<td>" + rs.getString("kolicina")+"</td>");
             out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td>" +"<a href=dodajUsluge.html"+ rs.getString("naziv")+"'>Dodaj</a>" +"</td>");
-   
+            out.println("<td><a href='UslugaNaPosjeti?sifra=" + rs.getString("sifra") + "'><i class='fas fa-trash'></i> Dodaj</a></td>");
        out.println("</tr>");
         }
         
@@ -129,7 +128,7 @@ public class OdabirUsluge extends HttpServlet{
         
         
 		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Usluga.class.getName());
+              Logger.getLogger(novoselac.model.Posjeta.class.getName());
 			out.println(ex);
 
          
