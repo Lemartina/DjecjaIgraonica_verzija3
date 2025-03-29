@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  */
 
 
-@WebServlet("/WebObrazac")
-public class WebObrazac extends HttpServlet{
+@WebServlet("/OdabirTermina")
+public class OdabirTermina extends HttpServlet{
     
 
     /**
@@ -75,39 +75,35 @@ public class WebObrazac extends HttpServlet{
          out.println("<div class=\"index-intro\"> \n" +
 "		<div class=\"wrapper\">\n" +
 "			<h1>Rezervacija termina za igraonicu</h1>\n" +
-"                 <h2>1. Podaci o djetetu </h2>\n" +
-"			<form action=\"JavaServletDjeca\" method=\"post\" >\n" +
+"                 <h2>2. Odabir termina </h2>\n" +
+"			<form action=\"JavaServletVrijeme\" method=\"post\" >\n" +
 "                            \n" +
-"                     <!--ovo sve treba staviti u java servlet preko out.println-->          \n" +
-"                   <!--<textarea name=\"message\"> Rezervacija termina za igraonicu </textarea>-->\n" +
-"                   <br><br>\n" +
-"                <div>\n" +
-"                   <input type=\"ime\" id=\"ime\" name= \"ime\" placeholder='Ime djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"prezime\" id=\"prezime\" name= \"prezime\" placeholder='Prezime djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"       \n" +
-"                <div>\n" +
-"                   <input type=\"oib\" id=\"oib\" name= \"oib\" placeholder='OIB djeteta'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"               \n" +
-"                            \n" +
-"                 <div>\n" +
-"                   <input type=\"imeRoditelja\" id=\"imeRoditelja\" name= \"imeRoditelja\" placeholder='Ime roditelja'>\n" +
-"                   <br><br>\n" +
-"                </div>\n" +
-"\n" +
-"                    <div>\n" +
-"                   <input type=\"telefonRoditelja\" id=\"telefonRoditelja\" name= \"telefonRoditelja\" placeholder='Telefon roditelja'>\n" +
+               "<h3> Datum i vrijeme dolaska </h3>\n" +
+"                   <input type=\"date\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
 "                   <br><br>\n" +
 "                </div>\n" +
 "                   \n" +
-                 "<div>\n" +     
+"                    <div>\n" +
+"                   <input type=\"time\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+                 
+                 "<h3> Datum i vrijeme odlaska </h3>\n" +
+"                   <input type=\"date\" id=\"datumVrijemeOdlaska\" name= \"datumVrijemeOdlaska\">\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+"                    <div>\n" +
+"                   <input type=\"time\" id=\"datumVrijemeDolaska\" name= \"datumVrijemeDolaska\">\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
+"                   \n" +
+                 
+"                <div>\n" +
+"                   <input type=\"message\" id=\"napomena\" name= \"napomena\" placeholder='Napomena'>\n" +
+"                   <br><br>\n" +
+"                </div>\n" +
 "                   ");
 
          
@@ -124,10 +120,10 @@ public class WebObrazac extends HttpServlet{
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	
-//      TABLICA USLUGA
+//      TABLICA POSJETA
 
         String sql;
-        sql="select * from  dijete";
+        sql="select * from  posjeta";
         Statement stmt = con.createStatement();
         ResultSet rs;
         rs=stmt.executeQuery(sql);
@@ -142,7 +138,7 @@ public class WebObrazac extends HttpServlet{
         
         
 		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Dijete.class.getName());
+              Logger.getLogger(novoselac.model.Posjeta.class.getName());
 			out.println(ex);
 
          

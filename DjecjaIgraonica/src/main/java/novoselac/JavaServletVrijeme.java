@@ -21,8 +21,8 @@ import java.sql.Statement;
  * @author Administrator
  */
 
-@WebServlet("/JavaServletDjeca")
-public class JavaServletDjeca extends HttpServlet {
+@WebServlet("/JavaServletVrijeme")
+public class JavaServletVrijeme extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,11 +57,11 @@ public class JavaServletDjeca extends HttpServlet {
         
         response.setContentType("text/html");
         PrintWriter out= response.getWriter();
-        String ime = request.getParameter("ime");
-        String prezime = request.getParameter("prezime");
-        String oib= request.getParameter("oib");
-        String imeRoditelja= request.getParameter("imeRoditelja");
-    String telefonRoditelja= request.getParameter("telefonRoditelja");
+        String sifra = request.getParameter("sifra");
+        String datumVrijemeDolaska = request.getParameter("datumVrijemeDolaska");
+        String datumVrijemeOdlaska= request.getParameter("datumVrijemeOdlaska");
+        String napomena= request.getParameter("napomena");
+    
          
 
        //jdbc connection
@@ -74,11 +74,11 @@ public class JavaServletDjeca extends HttpServlet {
         Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
 	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
 	Statement st = con.createStatement();
-        st.executeUpdate("insert into dijete(ime,prezime, oib, imeRoditelja, telefonRoditelja ) "
-                + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
+        st.executeUpdate("insert into posjeta(datumVrijemeDolaska, datumVrijemeOdlaska, napomena ) "
+                + "values ('"+datumVrijemeDolaska+"', '"+datumVrijemeOdlaska+"', '"+napomena+"')");
                         
-                        out.println("Podaci od djetetu uspješno uneseni!");
-                           out.println("<a href=OdabirTermina>Nastavi dalje na odabir termina </a>");
+                        out.println("Podaci o vremenu dolaska uspješno uneseni!");
+                           out.println("<a href=OdabirUsluge>Nastavi dalje na odabir usluga </a>");
                            
                            out.println("<a href=DjecaView>Popis unesene djece </a>");
                            

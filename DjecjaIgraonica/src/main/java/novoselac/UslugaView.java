@@ -19,7 +19,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/** treba dodati id usluge u posjetu
  *
  * @author Administrator
  */
