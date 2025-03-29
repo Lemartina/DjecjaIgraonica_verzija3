@@ -78,7 +78,11 @@ public class JavaServletDjeca extends HttpServlet {
                 + "values ('"+ime+"', '"+prezime+"', '"+oib+"', '"+imeRoditelja+"', '"+telefonRoditelja+"')");
                         
                         out.println("Podaci od djetetu i terminu uspješno uneseni!");
-                           out.println("<a href=OdabirUsluge>Nastavi dalje na odabir usluga /a>");
+                           out.println("<a href=OdabirUsluge>Nastavi dalje na odabir usluga </a>");
+                           
+                           out.println("<a href=DjecaView>Popis unesene djece </a>");
+                           
+                           
                 
 			
 st.close();
