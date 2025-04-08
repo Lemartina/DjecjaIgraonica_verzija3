@@ -63,7 +63,7 @@ public class UslugaView extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<title>Usluga View</title>");
-        //out.println("<link rel='stylesheet' type='text/css' href='style.css'>"); // Dodajte vaš CSS
+        
         out.println("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>"); // Dodajte Font Awesome
         out.println("</head>");
         out.println("<body>");

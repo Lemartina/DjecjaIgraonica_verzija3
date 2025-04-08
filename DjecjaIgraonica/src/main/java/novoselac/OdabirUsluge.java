@@ -105,19 +105,20 @@ public class OdabirUsluge extends HttpServlet{
         out.println("<td> Jedinica mjere</td>");
         out.println("<td> Količina</td>");
         out.println("<td> Naziv</td>");
-        out.println("<td> Dodaj</td>");
+        out.println("<td> Odaberi </td>");
       
         
         out.println("</tr>");
         
       
+            // Popunjavanje tablice podacima iz baze
         while (rs.next()) {
             out.println("<tr>");
             out.println("<td>" + rs.getString("cijena")+"</td>" );
             out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
             out.println("<td>" + rs.getString("kolicina")+"</td>");
             out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td><a href='UslugaNaPosjeti?sifra=" + rs.getString("sifra") + "'><i class='fas fa-trash'></i> Dodaj</a></td>");
+            out.println("<td><a href='UslugaNaPosjeti?sifra=" + rs.getString("sifra") + "'><i class='fas fa-trash'></i> Odaberi </a></td>");
        out.println("</tr>");
         }
         

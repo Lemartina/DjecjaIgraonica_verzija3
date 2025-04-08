@@ -1,123 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package novoselac;
 
-import java.sql.*;//1
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
-
-/**
- *
- * @author Administrator
- */
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/UslugaNaPosjeti")
 public class UslugaNaPosjeti extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-         
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException {
+        rsp.setContentType("text/html");
+        PrintWriter out = rsp.getWriter();
+
+        String sifra = req.getParameter("sifra");
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
+             PreparedStatement pst = con.prepareStatement("SELECT * FROM usluga WHERE sifra = ?")) {
+
+            pst.setString(1, sifra);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    out.print("<form action='DodajUsluguNaPosjetu' method='POST'>");
+                    out.print("<table>");
+                    out.print("<tr> <td>sifra</td>    <td> <input type='text' name='sifra' id='sifra' value='" + rs.getString("sifra") + "'/> </td> </tr>");
+                    out.print("<tr> <td>cijena</td>    <td> <input type='text' name='cijena' id='cijena' value='" + rs.getString("cijena") + "'/> </td> </tr>");
+                    out.print("<tr> <td>jedinicaMjere</td>    <td> <input type='text' name='jedinicaMjere' id='jedinicaMjere' value='" + rs.getString("jedinicaMjere") + "'/> </td> </tr>");
+                    out.print("<tr> <td>kolicina</td>    <td> <input type='text' name='kolicina' id='kolicina' value='" + rs.getString("kolicina") + "'/> </td> </tr>");
+                    out.print("<tr> <td>naziv</td>    <td> <input type='text' name='naziv' id='naziv' value='" + rs.getString("naziv") + "'/> </td> </tr>");
+                    out.print("<tr>  <td colspan='2'> <input type='submit' value='Odaberi'/> </td> </tr>");
+                    out.print("</table>");
+                    out.print("</form>");
+                }
+            }
+        } catch (SQLException ex) {
+            out.println("<font color='red'> Odabir usluge nije uspjelo! Šta nije ok? </font>");
+            ex.printStackTrace();
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        response.setContentType("text/html");
-        PrintWriter out= response.getWriter();
-        String usluga = request.getParameter("usluga");
-      
-        String posjeta = request.getParameter("posjeta");
-         
-
-       //jdbc connection
-       //https://www.youtube.com/watch?v=y_YxwyYRJek
-       //https://www.youtube.com/watch?v=5vzCjvUwMXg
-       	try {
-         //2b
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	//3
-        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
-	Statement st = con.createStatement();
-        st.executeUpdate("insert into uslugaposjeta(usluga, posjeta) values ('"+usluga+"', '"+posjeta+"')");
-                        
-                        out.println("Odabrane usluge uspješno spremljene!");
-                           out.println("<a href=OdabirTermina>Nastavi dalje na odabir termina </a>");
-                           
-                           out.println("<a href=DjecaView>Popis unesene djece </a>");
-                           
-                           /*    update nije moguće zbog konstrainta potrebno ispraviti upit punjenja baze */             
-			
-st.close();
-con.close();
-
-
-		} catch (Exception e) {
-			out.println(e);
-
-         
-		}
-	
-        
-	
-  }
-    
-  
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-      doGet(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
