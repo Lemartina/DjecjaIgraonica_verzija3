@@ -38,7 +38,7 @@ public class UslugaNaPosjeti extends HttpServlet {
                     out.print("<tr> <td>jedinicaMjere</td>    <td> <input type='text' name='jedinicaMjere' id='jedinicaMjere' value='" + rs.getString("jedinicaMjere") + "'/> </td> </tr>");
                     out.print("<tr> <td>kolicina</td>    <td> <input type='text' name='kolicina' id='kolicina' value='" + rs.getString("kolicina") + "'/> </td> </tr>");
                     out.print("<tr> <td>naziv</td>    <td> <input type='text' name='naziv' id='naziv' value='" + rs.getString("naziv") + "'/> </td> </tr>");
-                    out.print("<tr>  <td colspan='2'> <input type='submit' value='Odaberi'/> </td> </tr>");
+                    out.print("<tr>  <td colspan='2'> <input type='checkbox' value='O'/> </td> </tr>");
                     out.print("</table>");
                     out.print("</form>");
                 }

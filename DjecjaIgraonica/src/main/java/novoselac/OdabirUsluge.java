@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package novoselac;
 
 import jakarta.servlet.ServletException;
@@ -16,155 +12,96 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
-
-/**
- *
- * @author Administrator
- */
-
 
 @WebServlet("/OdabirUsluge")
-public class OdabirUsluge extends HttpServlet{
-    
+public class OdabirUsluge extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet javaServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Pozdrav da vidimo radi li!!! </h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.setContentType("text/html");
-        PrintWriter out= response.getWriter();
-    
-        out.println("<div class=\"index-intro\"> \n" +
-"		<div class=\"wrapper\">\n" +
-"			<h1>Rezervacija termina za igraonicu</h1>\n" +
-"                 <h2>3. Odabir usluge </h2></div>\n" +
-"                   ");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         
-       //jdbc connection
-
-       
-     
-       
-       	try {
-         //2b
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	//3
-        Connection con = DriverManager.getConnection//jdbc:mysql://localhost/djecjaigraonicahib
-	("jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
-	
-//      TABLICA USLUGA
-
-        String sql;
-        sql="select * from  usluga";
-        Statement stmt = con.createStatement();
-        ResultSet rs;
-        rs=stmt.executeQuery(sql);
+        // Get usluga from request if available
+        String usluga = request.getParameter("usluga");
         
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Odabir usluga</title>");
+        out.println("<style>");
+        out.println("table {border-collapse: collapse; width: 80%; margin: 20px auto;}");
+        out.println("th, td {border: 1px solid #ddd; padding: 8px; text-align: left;}");
+        out.println("th {background-color: #f2f2f2;}");
+        out.println(".container {width: 90%; margin: 0 auto;}");
+        out.println(".button {background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; margin: 10px;}");
+        out.println("</style>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<div class='container'>");
+        out.println("<h1>Rezervacija termina za igraonicu</h1>");
+        out.println("<h2>3. Odabir usluga</h2>");
         
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost/djecjaigraonicahib", "root", "");
             
-        
-        out.println("<table cellspacing='0' width='350px' border='1'>");
-        out.println("<tr>");
-        out.println("<td> Cijena</td>");
-        out.println("<td> Jedinica mjere</td>");
-        out.println("<td> Količina</td>");
-        out.println("<td> Naziv</td>");
-        out.println("<td> Odaberi </td>");
-      
-        
-        out.println("</tr>");
-        
-      
-            // Popunjavanje tablice podacima iz baze
-        while (rs.next()) {
+            // Create a form to submit selected services
+            out.println("<form method='post' action='DodajUsluguNaPosjetu'>");
+            if (usluga != null) {
+                out.println("<input type='hidden' name='usluga' value='" + usluga + "'>");
+            }
+            
+            out.println("<table>");
             out.println("<tr>");
-            out.println("<td>" + rs.getString("cijena")+"</td>" );
-            out.println("<td>" + rs.getString("jedinicaMjere")+"</td>" );
-            out.println("<td>" + rs.getString("kolicina")+"</td>");
-            out.println("<td>" + rs.getString("naziv")+"</td>");
-            out.println("<td><a href='UslugaNaPosjeti?sifra=" + rs.getString("sifra") + "'><i class='fas fa-trash'></i> Odaberi </a></td>");
-       out.println("</tr>");
+            out.println("<th>Cijena</th>");
+            out.println("<th>Jedinica mjere</th>");
+            out.println("<th>Količina</th>");
+            out.println("<th>Naziv</th>");
+            out.println("<th>Odaberi</th>");
+           out.println("</tr>");
+            
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usluga");
+            
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<td>" + rs.getString("cijena") + "</td>");
+                out.println("<td>" + rs.getString("jedinicaMjere") + "</td>");
+                out.println("<td>" + rs.getString("kolicina") + "</td>");
+                out.println("<td>" + rs.getString("naziv") + "</td>");
+                out.println("<td><input type='checkbox' name='selectedServices' value='" + 
+                           rs.getString("sifra") + "'></td>");
+                //out.println("<td><input type='number' name='kolicina_" + rs.getString("sifra") + 
+                  //         "' value='1' min='1' style='width: 50px;'></td>");
+                out.println("</tr>");
+            }
+            
+            out.println("</table>");
+            out.println("<input type='submit' class='button' value='Dodaj odabrane usluge'>");
+            out.println("</form>");
+            out.println("<a href='index.html' class='button'>Vrati se na glavni izbornik</a>");
+            
+            con.close();
+        } catch (ClassNotFoundException ex) {
+            out.println("<p style='color:red'>Greška: Database driver nije pronađen</p>");
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            out.println("<p style='color:red'>Greška pri pristupu bazi podataka: " + ex.getMessage() + "</p>");
+            ex.printStackTrace();
         }
         
-        out.println("<table>");
-        
-        out.println("<a href=index.html>vrati se nazad na glavni izbornik</a>");
-        
-        
-        
-		} catch (ClassNotFoundException ex) {
-              Logger.getLogger(novoselac.model.Posjeta.class.getName());
-			out.println(ex);
+        out.println("</div>");
+        out.println("</body>");
+        out.println("</html>");
+    }
 
-         
-		}
-	catch(SQLException ex){
-            out.println("<font color= 'red'> Record Failed </fornt>");
-        }
-        
-	
-  }
-    
-  
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      doGet(request, response);
+        // Forward to doGet if needed, or implement separate POST handling
+        doGet(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
-

@@ -76,6 +76,8 @@ public class JavaServletVrijeme extends HttpServlet {
 	Statement st = con.createStatement();
         st.executeUpdate("insert into posjeta(datumVrijemeDolaska, datumVrijemeOdlaska, napomena ) "
                 + "values ('"+datumVrijemeDolaska+"', '"+datumVrijemeOdlaska+"', '"+napomena+"')");
+        
+        
                         
                         out.println("Podaci o vremenu dolaska uspješno uneseni!");
                            out.println("<a href=OdabirUsluge>Nastavi dalje na odabir usluga </a>");

@@ -1,171 +1,113 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package novoselac.controller;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import novoselac.model.Dijete;
 import novoselac.model.GrafPodaci;
 import novoselac.model.Usluga;
 import novoselac.util.NovoselacException;
+import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Administrator
- */
-public class ObradaUsluga extends Obrada<Usluga> {
-     public List<GrafPodaci> getGrafPodaci(){
-        List<GrafPodaci> l = new ArrayList<>();
-        // preraditi na listu Grafpodaci
-         List<Object[]> lista =  session.createNativeQuery(
-                            " select c.naziv, count(a.datumVrijemeDolaska) as brojDogovorenihTermina " +
-                            " from posjeta a " +
-                            " inner join uslugaposjeta b on a.sifra =b.posjeta " +
-                            " inner join usluga c  on b.usluga = c.sifra " +
-                             " group by c.naziv "
-                  ,Object[].class
-                 ).getResultList();
+@Service
+@Transactional
+public class ObradaUsluga {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    public List<GrafPodaci> getGrafPodaci() {
+        List<GrafPodaci> rezultati = em.createNativeQuery(
+                "SELECT c.naziv, COUNT(a.datum_vrijeme_dolaska) AS broj_dogovorenih_termina "
+                + "FROM posjeta a "
+                + "INNER JOIN usluga_posjeta b ON a.sifra = b.posjeta_id "
+                + "INNER JOIN usluga c ON b.usluga_id = c.sifra "
+                + "GROUP BY c.naziv", "GrafPodaciMapping")
+                .getResultList();
+        
+        return rezultati;
+    }
+
+    public List<Usluga> read(String uvjet) {
+        uvjet = uvjet == null ? "" : uvjet.trim();
+        String search = "%" + uvjet + "%";
+        
+        TypedQuery<Usluga> query = em.createQuery(
+                "SELECT u FROM Usluga u "
+                + "WHERE CONCAT(u.naziv, ' ') LIKE :search "
+                + "ORDER BY u.naziv", Usluga.class);
+        
+        query.setParameter("search", search);
+        return query.getResultList();
+    }
+
+    public List<Usluga> readAll() {
+        return em.createQuery("SELECT u FROM Usluga u ORDER BY u.naziv", Usluga.class)
+                .getResultList();
+    }
+
+    public Usluga create(Usluga usluga) throws NovoselacException {
+        kontrolaUnos(usluga);
+        em.persist(usluga);
+        return usluga;
+    }
+
+    public Usluga update(Usluga usluga) throws NovoselacException {
+        kontrolaPromjena(usluga);
+        return em.merge(usluga);
+    }
+
+    public void delete(Long id) throws NovoselacException {
+        Usluga usluga = em.find(Usluga.class, id);
+        kontrolaBrisanje(usluga);
+        em.remove(usluga);
+    }
+
+    private void kontrolaUnos(Usluga u) throws NovoselacException {
+        kontrolaNaziv(u);
+        kontrolaCijena(u);
+    }
+
+    private void kontrolaPromjena(Usluga u) throws NovoselacException {
+        kontrolaNaziv(u);
+        kontrolaCijena(u);
+    }
+
+    private void kontrolaBrisanje(Usluga u) throws NovoselacException {
+        if (!u.getPosjete().isEmpty()) {
+            throw new NovoselacException("Usluga se ne može brisati jer ima povezane posjete");
+        }
+    }
+
+    // Ostale kontrolne metode ostaju slične, samo prilagođene za rad s EntityManagerom
+    private void kontrolaNaziv(Usluga u) throws NovoselacException {
+        if (u.getNaziv() == null || u.getNaziv().trim().isEmpty()) {
+            throw new NovoselacException("Naziv usluge je obavezan");
+        }
+        
+        if (u.getNaziv().length() < 3 || u.getNaziv().length() > 20) {
+            throw new NovoselacException("Naziv usluge mora imati 3-20 znakova");
+        }
        
-         GrafPodaci gf;
-         for(Object[] niz : lista){
-            gf = new GrafPodaci();
-            gf.setNaziv(niz[0].toString());
-            gf.setBroj(Integer.valueOf(niz[1].toString()));
-            l.add(gf);
-         }
-    
-    
-       return l;
-    }
-
-     
-        public List<Usluga> read(String uvjet) {
-        uvjet=uvjet.trim();
-        uvjet = "%" + uvjet + "%";
-       return session.createQuery("from Usluga "
-               + " where concat(naziv,' ',naziv) "
-               + " like :uvjet "
-               + " order by naziv ", 
-               Usluga.class)
-               .setParameter("uvjet", uvjet)
-               .list();
-    }
-     
-    @Override
-    public List<Usluga> read() {
-       return session.createQuery("from Usluga order by naziv",
-                Usluga.class).list();
-    }
-
-    @Override
-    protected void kontrolaUnos() throws NovoselacException {
-  kontrolaNaziv();
-  kontrolaCijena();
-    }
-    @Override
-    protected void kontrolaPromjena() throws NovoselacException {
-        kontrolaNazivNull();
-        kontrolaNazivNijeBroj();
-        kontrolaNazivMinimalnaDuzina();
-        kontrolaNazivMaksimalnaDuzina();
-    }
-
-    @Override
-    protected void kontrolaBrisanje() throws NovoselacException {
-        if(entitet.getPosjete()!= null &&
-                !entitet.getPosjete().isEmpty()){
-        throw new NovoselacException("Usluga se ne može brisati"
-                + " jer ima posjete ");
-    }
-
+        // Provjera duplikata
+        Long count = em.createQuery(
+                "SELECT COUNT(u) FROM Usluga u WHERE LOWER(u.naziv) = LOWER(:naziv) AND u.sifra != :sifra", Long.class)
+                .setParameter("naziv", u.getNaziv())
+                //.setParameter("sifra", u.getSifra() == null ? -1 : u.getSifra())
+                .getSingleResult();
         
-   }
-   
-    //1.UNOS
-    //kontrola naziva
-    
-  protected void kontrolaNaziv() throws NovoselacException {
-        kontrolaNazivNull();//radi
-        kontrolaNazivNijeBroj();//radi
-        kontrolaNazivMinimalnaDuzina();//radi
-        kontrolaNazivMaksimalnaDuzina();//radi
-        kontrolaNazivDupliUBazi();//radi
-  }
-  
-  
-  //kontrola cijena
-  
-   protected void kontrolaCijena() throws NovoselacException {
-        if(entitet.getCijena()==null ||
-                entitet.getCijena().compareTo(BigDecimal.ZERO)<=0 ||
-                entitet.getCijena().compareTo(new BigDecimal(500))==1){
-            throw new NovoselacException("Cijena mora biti postavljena, "
-                    + "veća od 0 i manja od 500");
+        if (count > 0) {
+            throw new NovoselacException("Usluga s tim nazivom već postoji");
         }
     }
-   
-   //ako cijena je nije unesena ili je veća od 0 ili je veća od 10000 izbaci grešku-radi
-  
-  
-    private void kontrolaNazivDupliUBazi() throws NovoselacException  {
-        List<Usluga> usluge=null;
-        try {
-            usluge = session.createQuery("from Usluga u "
-                    + " where u.naziv=:naziv", 
-                    Usluga.class)
-                    .setParameter("naziv", entitet.getNaziv())
-                    .list();
-        } catch (Exception e) {
-        }
-        if(usluge!=null && !usluge.isEmpty()){
-            throw new NovoselacException("Usluga s istim nazivom postoji u bazi");
+
+    private void kontrolaCijena(Usluga u) throws NovoselacException {
+        if (u.getCijena() == null 
+                || u.getCijena().compareTo(BigDecimal.ZERO) <= 0 
+                || u.getCijena().compareTo(new BigDecimal(500)) > 0) {
+            throw new NovoselacException("Cijena mora biti između 0.01 i 500");
         }
     }
-  
-  
-  private void kontrolaNazivNull() throws NovoselacException{
-      if(entitet.getNaziv()==null){
-          throw new NovoselacException ("Naziv usluge mora biti postavljen");
-          
-      
-      }
-  }
-    private void kontrolaNazivMaksimalnaDuzina() throws NovoselacException{
-      if(entitet.getNaziv().trim().length()>20){
-          throw new NovoselacException ("Naziv usluge može imati maksimalno 20 znakova");
-          
-      
-      }
-  }
-  
-  private void kontrolaNazivMinimalnaDuzina() throws NovoselacException{
-      if(entitet.getNaziv().trim().length()<3){
-          throw new NovoselacException ("Naziv usluge može imati minimalno 3 znaka");
-          
-      
-      }
-  }
-  
-  
-  private void kontrolaNazivNijeBroj()throws NovoselacException{
-     
-      boolean broj= false;
-      try {
-         Double.parseDouble(entitet.getNaziv());
-         broj=true;
-        
-      } catch (Exception e) {
-        
-      }
-      if(broj)
-   throw new NovoselacException("Naziv smjera ne smije biti broj");
-  }
-
-   
 }
-  
-
-    
