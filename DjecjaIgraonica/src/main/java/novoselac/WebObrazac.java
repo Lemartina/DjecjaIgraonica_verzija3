@@ -133,14 +133,7 @@ public class WebObrazac extends HttpServlet{
         rs=stmt.executeQuery(sql);
         
         
-            
-        
-        
-       
-        
-                
-        
-        
+                    
 		} catch (ClassNotFoundException ex) {
               Logger.getLogger(novoselac.model.Dijete.class.getName());
 			out.println(ex);
